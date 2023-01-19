@@ -98,3 +98,12 @@ label{
     position:sticky;
     bottom: 0;
 }
+
+.meusAgenTexto{
+    font-family: 'Encode Sans' !important;
+    font-style: normal !important;
+    color: #5A5A5A !important;
+}
+.azulzinho{
+    background-color: #d9f8ff;
+}
