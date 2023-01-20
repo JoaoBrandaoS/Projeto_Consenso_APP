@@ -95,8 +95,8 @@ label{
     color: #5A5A5A !important;
 }
 .rodapefix{
-    position:sticky;
-    bottom: 0;
+    position:fixed !important;
+    bottom: 0 !important;
 }
 
 .meusAgenTexto{
@@ -106,4 +106,14 @@ label{
 }
 .azulzinho{
     background-color: #d9f8ff;
+}
+.divisaoa{
+    height: 500px;
+}
+.btn-lab{
+    margin: 0;
+    border: 0;
+    padding: 0;
+    color: #363636;
+    background-color: #d9f8ff !important;
 }
