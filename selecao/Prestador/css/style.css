@@ -1,0 +1,130 @@
+html, body{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+.navbar{
+    padding-bottom: 0 !important;
+}
+.yourownclass{
+    font-family: Encode Sans;
+    font-style: normal;
+    font-size: 15px !important;
+ }
+ .fonte-logo{
+    font-family: 'Black Han Sans', sans-serif;
+    color: white !important;
+    font-size: 35px !important;
+    margin-top: 0;
+    line-height: 50px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+
+.corNav{
+    background-color: #0057DF;
+}
+
+.btn{
+    text-decoration: none !important;
+    color: white !important;
+    font-family:'Encode Sans', sans-serif !important;
+}
+
+.semDecoracao{
+    text-decoration: none;
+}
+.borda-nav{
+    font-family:'Black Han Sans', sans-serif !important;
+    color: #FFB800 !important;
+    border-bottom: 5px #FFB800 solid !important;
+    padding-bottom: 9%;
+}
+
+.laranja{
+    color: #FFB800 !important;
+}
+
+.rodape{
+    background-color: #D9D9D9;
+    
+}
+
+.imgtamanho{
+    width: 280px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+ }
+
+.copyri{
+    color: #00213E !important;
+}
+
+.redondinho{
+    Border: 2px solid grey;
+    border-radius: 8.5px;
+}
+
+.botaozinho{
+font-family: 'Encode Sans', sans-serif !important;
+font-style: normal !important;
+font-weight: 600 !important;
+font-size: 10px !important;
+line-height: 12px;
+display: flex ;
+align-items: center !important;
+color: #FFFFFF;
+}
+
+label{
+    font-family: 'Encode Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 12px !important;
+    color: #5A5A5A !important;
+}
+.rodapefix{
+    position:fixed !important;
+    bottom: 0 !important;
+}
+
+.meusAgenTexto{
+    font-family: 'Encode Sans' !important;
+    font-style: normal !important;
+    color: #5A5A5A !important;
+}
+.azulzinho{
+    background-color: #d9f8ff;
+}
+.divisaoa{
+    height: 500px;
+}
+.btn-lab{
+    margin: 0;
+    border: 0;
+    padding: 0;
+    color: #363636;
+    background-color: #d9f8ff !important;
+}
+.textolabel{
+    font-weight: 600 !important;
+    color: #727272 !important;
+}
+.borderCor{
+    border-color: #727272 !important;
+}
+.botaoTexto{
+    font-family: 'Encode Sans' !important;
+    font-weight: 700 !important;
+}
