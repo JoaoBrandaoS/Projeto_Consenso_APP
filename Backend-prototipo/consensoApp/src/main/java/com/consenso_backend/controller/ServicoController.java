@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.consenso_backend.model.Servico;
 import com.consenso_backend.model.Usuario;
 import com.consenso_backend.service.ServicoService;
+import com.consenso_backend.service.UsuarioService;
 
 @RestController
 public class ServicoController {
@@ -23,13 +24,12 @@ public class ServicoController {
 
     @PostMapping("/servico")
     public ResponseEntity<Object> criarNovoServico(@RequestBody Servico servico){
-       Usuario pessoa = new Usuario();
-
-        if(pessoa.getTiposUsuarios().getNome().equals("prestador")){
-            servicoService.save(servico);
+        Usuario user = usuarioService.findById(servico.getUsuario().getIdUsuario()).get();
+        if(user.getTipoUsuario().getIdTipoUsuario() == 2){
+        servicoService.save(servico); 
         return ResponseEntity.status(HttpStatus.CREATED).body(servico);
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(pessoa.getServicos().getNome());
+     }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(servico.getUsuario().getNome());
     }
 
     @GetMapping("/servico")
@@ -37,19 +37,19 @@ public class ServicoController {
         return servicoService.findAll();
     }
 
-    @GetMapping("/servicos/{id}")
+    @GetMapping("/servico/{id}")
     public Servico servicoPorId(@PathVariable("id") Integer id){
         return servicoService.findById(id).get();
     }
 
-    @DeleteMapping("/servicos/{id}")
+    @DeleteMapping("/servico/{id}")
     public String deletarServico(@PathVariable("id") Integer id){
         servicoService.deleteById(id);
         
         return "Serviço deletado com sucesso";
     }
 
-    @PutMapping("/servicos")
+    @PutMapping("/servico")
     public Servico atualizarServico(@RequestBody Servico servico){
         Servico servicoBD = servicoService.findById(servico.getIdServico()).get();
 
@@ -63,5 +63,9 @@ public class ServicoController {
 
     @Autowired
     private ServicoService servicoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
 
 }

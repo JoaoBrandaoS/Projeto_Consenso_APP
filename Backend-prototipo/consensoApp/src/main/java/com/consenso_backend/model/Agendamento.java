@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -19,5 +20,14 @@ public class Agendamento {
    
     private Date data;
     private Date hora;
+
+    
+    @OneToOne
+    private Usuario usuario;
+
+    @OneToOne
+    private Servico servicos;
+
+
     
 }

@@ -22,7 +22,7 @@ public class Usuario {
     private String senha;
 
     @OneToOne
-    private TipoUsuario tiposUsuarios;
+    private TipoUsuario tipoUsuario;
 
     @OneToOne
     private Servico servicos;

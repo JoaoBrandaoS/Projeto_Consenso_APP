@@ -25,7 +25,7 @@ public class AgendamentoController {
     public ResponseEntity<Object> novoAgendamento(@RequestBody Agendamento agendar){
         Usuario pessoa = new Usuario();
 
-        if(pessoa.getTiposUsuarios().getNome().equals("cliente")){
+        if(pessoa.getTipoUsuario().getIdTipoUsuario() == 1){
             agendamentoService.save(agendar);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(agendar);
