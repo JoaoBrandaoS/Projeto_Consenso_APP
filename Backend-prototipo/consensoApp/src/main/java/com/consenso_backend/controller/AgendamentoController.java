@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.consenso_backend.model.Agendamento;
 import com.consenso_backend.model.Usuario;
 import com.consenso_backend.service.AgendamentoService;
+import com.consenso_backend.service.UsuarioService;
 
 @RestController
 public class AgendamentoController {
@@ -23,14 +24,14 @@ public class AgendamentoController {
 
     @PostMapping("/agendamento")
     public ResponseEntity<Object> novoAgendamento(@RequestBody Agendamento agendar){
-        Usuario pessoa = new Usuario();
+        Usuario user = usuarioService.findById(agendar.getUsuario().getTipoUsuario().getIdTipoUsuario()).get();
 
-        if(pessoa.getTipoUsuario().getIdTipoUsuario() == 1){
+        if(user.getTipoUsuario().getIdTipoUsuario() == 1){
             agendamentoService.save(agendar);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(agendar);
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(pessoa.getServicos().getNome());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user.getNome());
         
     }
 
@@ -66,5 +67,8 @@ public class AgendamentoController {
 
     @Autowired
     private AgendamentoService agendamentoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
 }
