@@ -1,7 +1,13 @@
 var bordinha = document.querySelector("#meusagendamentos");
 
+if (window.innerWidth < 576) {
+  bordinha.classList.remove("borda-nav");
+} else {
+  bordinha.classList.add("borda-nav");
+}
+
 window.addEventListener("resize", () => {
-  if (window.innerWidth < 600) {
+  if (window.innerWidth < 576) {
     bordinha.classList.remove("borda-nav");
   } else {
     bordinha.classList.add("borda-nav");

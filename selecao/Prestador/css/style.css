@@ -128,3 +128,6 @@ label{
     font-family: 'Encode Sans' !important;
     font-weight: 700 !important;
 }
+textarea{
+    resize: none !important;
+}
