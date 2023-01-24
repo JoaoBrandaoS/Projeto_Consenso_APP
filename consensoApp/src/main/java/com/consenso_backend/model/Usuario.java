@@ -24,10 +24,5 @@ public class Usuario {
     @OneToOne
     private TipoUsuario tipoUsuario;
 
-    @OneToOne
-    private Servico servicos;
-
-    @OneToOne
-    private Agendamento agendamento;
 
 }
