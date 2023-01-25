@@ -20,7 +20,13 @@ public class TipoUsuarioController {
 
     @PostMapping("/tipousuario")
     public TipoUsuario adicionarTipoUsuario(@RequestBody TipoUsuario tipo){
+        try{
         return tipoUsuarioService.save(tipo);
+
+        }catch(Exception e){
+        return null;
+
+    }
     }
 
     @GetMapping("/tipousuario")

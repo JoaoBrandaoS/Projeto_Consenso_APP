@@ -24,15 +24,18 @@ public class AgendamentoController {
 
     @PostMapping("/agendamento")
     public ResponseEntity<Object> novoAgendamento(@RequestBody Agendamento agendar){
-        Usuario user = usuarioService.findById(agendar.getUsuario().getTipoUsuario().getIdTipoUsuario()).get();
+    
+        try{
+            Usuario user = usuarioService.findById(agendar.getUsuario().getTipoUsuario().getIdTipoUsuario()).get();
+            if(user.getTipoUsuario().getIdTipoUsuario() == 1){
+                agendamentoService.save(agendar);
 
-        if(user.getTipoUsuario().getIdTipoUsuario() == 1){
-            agendamentoService.save(agendar);
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(agendar);
+                return ResponseEntity.status(HttpStatus.CREATED).body(agendar);
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user.getNome());
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user.getNome());
-        
     }
 
     @GetMapping("/agendamento")

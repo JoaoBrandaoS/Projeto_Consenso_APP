@@ -23,13 +23,20 @@ public class UsuarioController {
     
 @PostMapping("/usuario")
 public ResponseEntity<Object> criarNovoUsuario(@RequestBody Usuario usuario) {
-        
-    if (usuario.getTipoUsuario().getIdTipoUsuario() == 1 || usuario.getTipoUsuario().getIdTipoUsuario() == 2) {
+
+    try{
+
+    if(usuario.getTipoUsuario().getIdTipoUsuario() == 1 || usuario.getTipoUsuario().getIdTipoUsuario() == 2){
         usuarioService.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
+   
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(usuario.getTipoUsuario().getNome());
+    
+    }catch(Exception e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 
+    }
 }
 
 @GetMapping("/usuario")

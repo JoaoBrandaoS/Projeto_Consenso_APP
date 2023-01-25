@@ -24,12 +24,18 @@ public class ServicoController {
 
     @PostMapping("/servico")
     public ResponseEntity<Object> criarNovoServico(@RequestBody Servico servico){
-        Usuario user = usuarioService.findById(servico.getUsuario().getIdUsuario()).get();
-        if(user.getTipoUsuario().getIdTipoUsuario() == 2){
-        servicoService.save(servico); 
-        return ResponseEntity.status(HttpStatus.CREATED).body(servico);
-     }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(servico.getUsuario().getNome());
+       
+        try{
+            Usuario user = usuarioService.findById(servico.getUsuario().getIdUsuario()).get();
+            if(user.getTipoUsuario().getIdTipoUsuario() == 2){
+            servicoService.save(servico); 
+            return ResponseEntity.status(HttpStatus.CREATED).body(servico);
+           }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(servico.getUsuario().getNome());
+            }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+        }
     }
 
     @GetMapping("/servico")
