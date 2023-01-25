@@ -53,31 +53,50 @@ public class AgendamentoController {
 
     @GetMapping("/agendamento")
     public List<Agendamento> agendamentoCadastrados(){
+     try{    
         return agendamentoService.findAll();
+
+     }catch(Exception e){
+        return null;  
+     }
     }
 
     @GetMapping("/agendamento/{id}")
     public Agendamento agendamentoUnico(@PathVariable("id") Integer id){
-        return agendamentoService.findById(id).get();
-    }
+        try{
+            return agendamentoService.findById(id).get();
+        }catch(Exception e){
+            return null;
+        }
+        }
 
     @DeleteMapping("/agendamento/{id}")
     public String deletarAgendamento(@PathVariable("id") Integer id){
-        agendamentoService.deleteById(id);
-        return "Agendamento deletado!!";
+        try{
+            agendamentoService.deleteById(id);
+            return "Agendamento deletado!!";
+        }catch(Exception e){
+            return "Falha ao deletar agendamento";
+        }
+
     }
 
     @PutMapping("/agendamento")
     public Agendamento atualizarAgendamento(@RequestBody Agendamento agendar){
-        Agendamento agendarBD = agendamentoService.findById(agendar.getIdAgendamento()).get();
         
-        agendarBD.setData(agendar.getData());
-        agendarBD.setHora(agendar.getHora());
+        try{    
+            Agendamento agendarBD = agendamentoService.findById(agendar.getIdAgendamento()).get();
+            
+            agendarBD.setData(agendar.getData());
+            agendarBD.setHora(agendar.getHora());
 
-        agendarBD = agendamentoService.save(agendarBD);
+            agendarBD = agendamentoService.save(agendarBD);
 
-        return agendarBD;
-    
+            return agendarBD;
+        }catch(Exception e){
+            return null;
+            
+        }
     }
 
 

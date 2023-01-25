@@ -17,7 +17,8 @@ public class LoginController {
     
     @PostMapping("/login")
     public ResponseEntity<Object> fazerLogin(@RequestBody Login login){
-        try {
+
+        try{
             Usuario verificarEmail = usuarioService.findByemail(login.getEmail()).get();
             if(verificarEmail.getSenha().equals(login.getSenha())){
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(verificarEmail);

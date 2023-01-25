@@ -40,12 +40,20 @@ public class ServicoController {
 
     @GetMapping("/servico")
     public List<Servico> todosServicos(){
-        return servicoService.findAll();
+        try{
+            return servicoService.findAll();
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @GetMapping("/servico/{id}")
     public Servico servicoPorId(@PathVariable("id") Integer id){
+       try{
         return servicoService.findById(id).get();
+    }catch(Exception e){
+        return null;
+    }
     }
 
     @DeleteMapping("/servico/{id}")
