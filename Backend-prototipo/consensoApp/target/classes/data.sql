@@ -1,6 +1,12 @@
-INSERT INTO `usuario` (`nome`,`sobrenome`,`senha`,`email`)
+
+INSERT INTO `tipo_usuario` (`nome`)
 VALUES
-  ("Sade Lucas","Zenaida Dunlap","(481) 715-0612","aliquet.magna.a@hotmail.ca"),
+  ("cliente"),
+  ("prestador");
+
+INSERT INTO `Usuario` (`nome`,`sobrenome`,`senha`,`email`)
+VALUES
+  ("admin","admin","(12345678","admin@gmail.com"),
   ("Gabriel Frost","Dillon Russo","(337) 318-5256","congue.a@hotmail.com"),
   ("Caleb David","Mary Cooper","1-695-714-6651","vitae@aol.org"),
   ("Jillian Gilbert","Boris Hull","1-176-355-3428","blandit.mattis@aol.edu"),
@@ -11,4 +17,12 @@ VALUES
   ("Forrest Waters","Kylie Michael","1-258-855-0513","proin.non@hotmail.net"),
   ("Gretchen Tyler","Vance Shields","1-727-438-1330","lectus.a@yahoo.couk");
 
-  INSERT INTO 'tipousuario' ('nome') VALUES ("cliente"),("prestador");
+INSERT INTO `servico` (`nome`,`descricao`)
+VALUES
+  ("pulando corda","to pulando muuuito"),
+  ("escalando montanha","to escalando igual louco");
+
+
+
+
+

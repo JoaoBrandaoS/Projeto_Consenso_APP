@@ -23,9 +23,9 @@ public class AgendamentoController {
     
 
     @PostMapping("/agendamento")
-    public ResponseEntity<Object> novoAgendamento(@RequestBody Agendamento agendar){
+    public Agendamento novoAgendamento(@RequestBody Agendamento agendar){
     
-        try{
+        /*try{
             Usuario user = usuarioService.findById(agendar.getUsuario().getTipoUsuario().getIdTipoUsuario()).get();
             if(user.getTipoUsuario().getIdTipoUsuario() == 1){
                 agendamentoService.save(agendar);
@@ -36,6 +36,19 @@ public class AgendamentoController {
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+        */
+        try{
+           Usuario user = usuarioService.findById(agendar.getUsuario().getTipoUsuario().getIdTipoUsuario()).get();
+            if(user.getTipoUsuario().getIdTipoUsuario() == 1){
+                
+
+                return  agendamentoService.save(agendar);
+        }
+           return null;
+        }catch(Exception e){
+
+            return null;
+        } 
     }
 
     @GetMapping("/agendamento")
