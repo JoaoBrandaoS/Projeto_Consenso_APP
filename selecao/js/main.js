@@ -27,19 +27,15 @@ form.addEventListener("submit", async (event) => {
         if(tipouser == 1){
           let data = await response.json();
           localStorage.setItem("idUsuario", data.idUsuario);
-          window.location.href = "../index.html";
+          window.location.href = "../login.html";
         }
         else if(tipouser == 2){
           let data = await response.json();
           localStorage.setItem("idUsuario", data.idUsuario);
-          window.location.href = "../Prestador/index.html";
+          window.location.href = "../login.html";
         }
     }
   } catch (error) {
     console.error(error);
   }
 });
-
-function getUserId() {
-  return localStorage.getItem("userId");
-}
