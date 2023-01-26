@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.consenso_backend.model.Agendamento;
 import com.consenso_backend.service.AgendamentoService;
-import com.consenso_backend.service.UsuarioService;
+
 
 @RestController
 public class AgendamentoController {
