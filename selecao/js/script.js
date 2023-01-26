@@ -13,3 +13,4 @@ window.addEventListener("resize", () => {
     bordinha.classList.add("borda-nav");
   }
 });
+
