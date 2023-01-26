@@ -3,6 +3,7 @@ package com.consenso_backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,32 +21,27 @@ public class AgendamentoController {
     
 
     @PostMapping("/agendamento")
-    public Agendamento novoAgendamento(@RequestBody Agendamento agendar){
+    public Object novoAgendamento(@RequestBody Agendamento agendar){
        try{
             return  agendamentoService.save(agendar);
         }catch(Exception e){
-            return null;
+            String erro = "Erro em adicionar novo agendamento";
+            return erro;
         } 
     }
 
     @GetMapping("/agendamento")
     public List<Agendamento> agendamentoCadastrados(){
-     try{    
         return agendamentoService.findAll();
-
-     }catch(Exception e){
-        return null;  
-     }
     }
 
     @GetMapping("/agendamento/{id}")
-    public Agendamento agendamentoUnico(@PathVariable("id") Integer id){
-        try{
-            return agendamentoService.findById(id).get();
-        }catch(Exception e){
-            return null;
+    public ResponseEntity<Agendamento> agendamentoUnico(@PathVariable("id") Integer id){
+        
+    return agendamentoService.findById(id).map(record -> ResponseEntity.ok().body(record))
+     .orElse(ResponseEntity.notFound().build());
         }
-        }
+        
 
     @DeleteMapping("/agendamento/{id}")
     public String deletarAgendamento(@PathVariable("id") Integer id){
@@ -59,7 +55,7 @@ public class AgendamentoController {
     }
 
     @PutMapping("/agendamento")
-    public Agendamento atualizarAgendamento(@RequestBody Agendamento agendar){
+    public Object atualizarAgendamento(@RequestBody Agendamento agendar){
         
         try{    
             Agendamento agendarBD = agendamentoService.findById(agendar.getIdAgendamento()).get();
@@ -71,7 +67,8 @@ public class AgendamentoController {
 
             return agendarBD;
         }catch(Exception e){
-            return null;
+            String erro = "não foi possivel atualizar agendamento";
+            return erro;
             
         }
 
