@@ -3,8 +3,6 @@ package com.consenso_backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.consenso_backend.model.Agendamento;
-import com.consenso_backend.model.Usuario;
 import com.consenso_backend.service.AgendamentoService;
 import com.consenso_backend.service.UsuarioService;
 
@@ -24,27 +21,9 @@ public class AgendamentoController {
 
     @PostMapping("/agendamento")
     public Agendamento novoAgendamento(@RequestBody Agendamento agendar){
-    
-        /*try{
-            Usuario user = usuarioService.findById(agendar.getUsuario().getTipoUsuario().getIdTipoUsuario()).get();
-            if(user.getTipoUsuario().getIdTipoUsuario() == 1){
-                agendamentoService.save(agendar);
-
-                return ResponseEntity.status(HttpStatus.CREATED).body(agendar);
-            }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(user.getNome());
+       try{
+            return  agendamentoService.save(agendar);
         }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-        */
-        try{
-           Usuario user = usuarioService.findById(agendar.getUsuario().getTipoUsuario().getIdTipoUsuario()).get();
-            if(user.getTipoUsuario().getIdTipoUsuario() == 1){
-                return  agendamentoService.save(agendar);
-        }
-           return null;
-        }catch(Exception e){
-
             return null;
         } 
     }
@@ -95,13 +74,18 @@ public class AgendamentoController {
             return null;
             
         }
+
+
+    }
+
+    @GetMapping("/agendamento/usuario/{id}")
+    public List<Agendamento> listaDeServicosUsuarios(@PathVariable("id") Integer id){
+        return agendamentoService.findByIdUsuario(id);
     }
 
 
     @Autowired
     private AgendamentoService agendamentoService;
 
-    @Autowired
-    private UsuarioService usuarioService;
 
 }

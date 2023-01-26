@@ -41,20 +41,17 @@ public ResponseEntity<Object> criarNovoUsuario(@RequestBody Usuario usuario) {
 
 @GetMapping("/usuario")
 public List<Usuario> usuariosRegistrados(){
-    try{
-        return usuarioService.findAll();
-    }catch(Exception e){
-        return null;
-    }
-
+   return usuarioService.findAll();
+   
 }
 
 @GetMapping("/usuario/{id}")
-public Usuario usuarioRegistradoPorId(@PathVariable("id") Integer id){
-   try{ return usuarioService.findById(id).get();
-   }catch(Exception e){
-    return null;
-   }
+public ResponseEntity<Usuario> usuarioRegistradoPorId(@PathVariable("id") Integer id){
+   
+     return usuarioService.findById(id).map(record -> ResponseEntity.ok().body(record))
+     .orElse(ResponseEntity.notFound().build());
+   
+   
 }
 
 @DeleteMapping("/usuario/{id}")
@@ -68,7 +65,7 @@ public String deletarUsuario(@PathVariable("id") Integer id){
 }
 
 @PutMapping("/usuario")
-public Usuario atualizarUsuario(@RequestBody Usuario usuario){
+public Object atualizarUsuario(@RequestBody Usuario usuario){
     try{    
         Usuario usuarioBD = usuarioService.findById(usuario.getIdUsuario()).get();
         usuarioBD.setNome(usuario.getNome()); 
@@ -80,7 +77,8 @@ public Usuario atualizarUsuario(@RequestBody Usuario usuario){
 
         return usuarioBD; 
     }catch(Exception e){
-        return null;
+        String erro = "Erro a atualizar usuario ";
+        return erro;
     }
 }
 

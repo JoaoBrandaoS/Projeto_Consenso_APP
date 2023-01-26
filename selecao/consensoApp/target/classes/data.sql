@@ -17,12 +17,11 @@ VALUES
   ("Forrest Waters","Kylie Michael","1-258-855-0513","proin.non@hotmail.net"),
   ("Gretchen Tyler","Vance Shields","1-727-438-1330","lectus.a@yahoo.couk");
 
+
+
 INSERT INTO `servico` (`nome`,`descricao`)
 VALUES
-  ("pulando corda","to pulando muuuito"),
-  ("escalando montanha","to escalando igual louco");
-
-
-
+("pular codar","pulando muito"),
+("pedrinhas","carregarei pedra")
 
 
