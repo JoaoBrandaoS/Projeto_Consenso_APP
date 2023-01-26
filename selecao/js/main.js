@@ -1,24 +1,45 @@
-const email = document.getElementById("email");
-const senha = document.getElementById("senha");
-const tipoUser = document.getElementById("tipoUser");
+let form = document.getElementById("cadastroForm");
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
 
-console.log(email.value)
-addEventListener('submit', (e) => {
-    e.cadastro(email, senha);
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+  const tipouser = document.getElementById("tipoUser").value;
+
+  try {
+    const response = await fetch("http://localhost:8080/usuario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify({
+        email: email,
+        senha: senha,
+        tipoUsuario: {
+            idTipoUsuario: tipouser
+        }
+      }),
+    });
+    console.log(response);
+
+    if (response.status == 201) {
+        if(tipouser == 1){
+          let data = await response.json();
+          localStorage.setItem("idUsuario", data.idUsuario);
+          window.location.href = "../index.html";
+        }
+        else if(tipouser == 2){
+          let data = await response.json();
+          localStorage.setItem("idUsuario", data.idUsuario);
+          window.location.href = "../Prestador/index.html";
+        }
+    }
+  } catch (error) {
+    console.error(error);
+  }
 });
 
-function cadastro(email, senha){
-    (async () => {
-        const respostaLista = await fetch("http://localhost:8080/usuario", {
-            method: "POST",
-            body: JSON.stringify({
-                email: email,
-                senha: senha
-            }),
-            headers:{
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-        const content = await respostaLista.json();
-    })
+function getUserId() {
+  return localStorage.getItem("userId");
 }
