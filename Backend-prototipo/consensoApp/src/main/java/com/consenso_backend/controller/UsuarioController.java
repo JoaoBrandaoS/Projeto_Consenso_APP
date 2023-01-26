@@ -41,34 +41,47 @@ public ResponseEntity<Object> criarNovoUsuario(@RequestBody Usuario usuario) {
 
 @GetMapping("/usuario")
 public List<Usuario> usuariosRegistrados(){
-    return usuarioService.findAll();
+    try{
+        return usuarioService.findAll();
+    }catch(Exception e){
+        return null;
+    }
+
 }
 
 @GetMapping("/usuario/{id}")
 public Usuario usuarioRegistradoPorId(@PathVariable("id") Integer id){
-    return usuarioService.findById(id).get();
+   try{ return usuarioService.findById(id).get();
+   }catch(Exception e){
+    return null;
+   }
 }
 
 @DeleteMapping("/usuario/{id}")
 public String deletarUsuario(@PathVariable("id") Integer id){
+    try{
     usuarioService.deleteById(id);
-
     return "Usuario deletado com sucesso!!";
+    }catch(Exception e){
+        return "Não foi possivel deletar o usuario";
+    }
 }
 
 @PutMapping("/usuario")
 public Usuario atualizarUsuario(@RequestBody Usuario usuario){
-    Usuario usuarioBD = usuarioService.findById(usuario.getIdUsuario()).get();
+    try{    
+        Usuario usuarioBD = usuarioService.findById(usuario.getIdUsuario()).get();
+        usuarioBD.setNome(usuario.getNome()); 
+        usuarioBD.setSobrenome(usuario.getSobrenome());
+        usuarioBD.setEmail(usuario.getEmail());
+        usuarioBD.setSenha(usuario.getSenha());
 
-    usuarioBD.setNome(usuario.getNome()); 
-    usuarioBD.setSobrenome(usuario.getSobrenome());
-    usuarioBD.setEmail(usuario.getEmail());
-    usuarioBD.setSenha(usuario.getSenha());
+        usuarioBD = usuarioService.save(usuarioBD);
 
-    usuarioBD = usuarioService.save(usuarioBD);
-
-    return usuarioBD; 
-
+        return usuarioBD; 
+    }catch(Exception e){
+        return null;
+    }
 }
 
 

@@ -58,21 +58,30 @@ public class ServicoController {
 
     @DeleteMapping("/servico/{id}")
     public String deletarServico(@PathVariable("id") Integer id){
-        servicoService.deleteById(id);
-        
+       try{
+        servicoService.deleteById(id);   
         return "Serviço deletado com sucesso";
+       }catch(Exception e){
+        return "falha ao deletar contato";
+       }
     }
 
     @PutMapping("/servico")
     public Servico atualizarServico(@RequestBody Servico servico){
-        Servico servicoBD = servicoService.findById(servico.getIdServico()).get();
+       
+       try{ 
+            Servico servicoBD = servicoService.findById(servico.getIdServico()).get();
 
-        servicoBD.setNome(servico.getNome());
-        servicoBD.setDescricao(servico.getDescricao());
+            servicoBD.setNome(servico.getNome());
+            servicoBD.setDescricao(servico.getDescricao());
 
-        servicoBD = servicoService.save(servicoBD);
+            servicoBD = servicoService.save(servicoBD);
 
-        return servicoBD;
+            return servicoBD;
+        }catch(Exception e){
+            return null;
+        }
+    
     }
 
     @Autowired

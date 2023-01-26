@@ -3,6 +3,7 @@ package com.consenso_backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,32 +32,46 @@ public class TipoUsuarioController {
 
     @GetMapping("/tipousuario")
     public List<TipoUsuario> todosOsTiposUsuarios(){
+      try{
         return tipoUsuarioService.findAll();
-        
+      }catch(Exception e){
+        return null;
+      }
     }
 
     @GetMapping("/tipousuario/{id}")
     public TipoUsuario unicoTipoUsuario(@PathVariable("id") Integer id){
-        return tipoUsuarioService.findById(id).get();
+        try{return tipoUsuarioService.findById(id).get();
+        }catch(Exception a){
+            return null;
+        }
+    
     }
 
     @DeleteMapping("/tipousuario/{id}")
     public String deletarUnicoUsuario(@PathVariable("id") Integer id){
+       try{
         tipoUsuarioService.deleteById(id);
         return "Tipo usuario deletado";
-
+       }catch(Exception e){
+        return "Tipo de usuario não foi deletado";
+       }
     }
 
     @PutMapping("/tipousuario")
     public TipoUsuario atualizarTipoUsuario(@RequestBody TipoUsuario tipoUsuario){
-        TipoUsuario tipoUsuarioBD = tipoUsuarioService.findById(tipoUsuario.getIdTipoUsuario()).get();
+        try{
+        
+            TipoUsuario tipoUsuarioBD = tipoUsuarioService.findById(tipoUsuario.getIdTipoUsuario()).get();
 
-        tipoUsuarioBD.setNome(tipoUsuario.getNome());
+            tipoUsuarioBD.setNome(tipoUsuario.getNome());
 
-        tipoUsuarioBD = tipoUsuarioService.save(tipoUsuarioBD);
+            tipoUsuarioBD = tipoUsuarioService.save(tipoUsuarioBD);
 
-        return tipoUsuarioBD;
-
+            return tipoUsuarioBD;
+        }catch(Exception e){
+            return null;
+        }
     }
 
     @Autowired

@@ -40,8 +40,6 @@ public class AgendamentoController {
         try{
            Usuario user = usuarioService.findById(agendar.getUsuario().getTipoUsuario().getIdTipoUsuario()).get();
             if(user.getTipoUsuario().getIdTipoUsuario() == 1){
-                
-
                 return  agendamentoService.save(agendar);
         }
            return null;
