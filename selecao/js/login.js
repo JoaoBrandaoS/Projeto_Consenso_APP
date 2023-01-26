@@ -16,10 +16,16 @@ loginForm.addEventListener("submit", async (event) => {
         senha: senha
       }),
     });
+    console.log(response);
     const content = await response.json();
     if (response.ok) {
-      let token = await response.text();
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", content.idUsuario);
+      if(content.tipoUsuario.idTipoUsuario === 1){
+        window.location.href = "meusagendamentos.html";
+      }
+      else if(content.tipoUsuario.idTipoUsuario === 2){
+        window.location.href = "prestadoragendamentos.html";
+      }
     } else {
       alert("Usuário ou senha inválidos");
     }
