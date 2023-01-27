@@ -1,6 +1,6 @@
 package com.consenso_backend.model;
 
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,7 +12,6 @@ import lombok.Data;
 public class TipoUsuario {
     
     @Id
-    @Column(name = "TIPOUSUARIO_IDTIPOUSUARIO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTipoUsuario;
      

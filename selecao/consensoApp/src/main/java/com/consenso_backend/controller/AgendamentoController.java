@@ -75,10 +75,7 @@ public class AgendamentoController {
 
     }
 
-    @GetMapping("/agendamento/usuario/{id}")
-    public List<Agendamento> listaDeServicosUsuarios(@PathVariable("id") Integer id){
-        return agendamentoService.findByIdUsuario(id);
-    }
+
 
 
     @Autowired

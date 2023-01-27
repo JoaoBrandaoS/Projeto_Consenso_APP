@@ -4,7 +4,7 @@ VALUES
   ("cliente"),
   ("prestador");
 
-INSERT INTO `Usuario` (`nome`,`sobrenome`,`senha`,`email`,`tipousuario_idtipousuario`)
+INSERT INTO `Usuario` (`nome`,`sobrenome`,`senha`,`email`,`tipo_usuario_id_tipo_usuario`)
 VALUES
   ("admin","admin","(12345678","admin@gmail.com",2),
   ("Gabriel Frost","Dillon Russo","(337) 318-5256","congue.a@hotmail.com",2),

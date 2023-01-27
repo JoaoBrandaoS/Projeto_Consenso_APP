@@ -84,6 +84,11 @@ public class ServicoController {
     
     }
 
+    @GetMapping("/servico/usuario/{id}")
+    public List<Servico> listadeServicosPorID(@PathVariable Integer id){
+        return servicoService.findServicoByusuarioIdUsuario(id);
+    }
+
     @Autowired
     private ServicoService servicoService;
 
