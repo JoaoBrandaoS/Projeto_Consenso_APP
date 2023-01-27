@@ -3,7 +3,7 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   let nome = document.getElementById("nomeServico").value;
-  let descricao = document.getElementById("descricao").value;
+  let descricao = document.getElementById("descricaoServico").value;
   let idUsuario = getUserId();
 
   try {
@@ -24,14 +24,16 @@ form.addEventListener("submit", async (event) => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    alert("Cadastro realizado com sucesso!");
-    window.location.href = "index.html"
+    else if(response.ok){
+      alert("Cadastro realizado com sucesso!");
+      window.location.href = "Servicos.html"
+    }
   } catch (error) {
     console.error(error);
     alert("Erro ao realizar cadastro, tente novamente mais tarde.")
   }
 });
+
 function getUserId() {
   return localStorage.getItem("token");
 }
-
