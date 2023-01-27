@@ -75,7 +75,10 @@ public class AgendamentoController {
 
     }
 
-
+    @GetMapping("/agendamento/usuario/{id}")
+    public List<Agendamento>listadeAgendamentosPorId(@PathVariable Integer id){
+        return agendamentoService.findByusuarioIdUsuario(id);
+    }
 
 
     @Autowired

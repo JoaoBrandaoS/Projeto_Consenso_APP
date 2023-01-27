@@ -1,7 +1,7 @@
 package com.consenso_backend.model;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -23,7 +23,7 @@ public class Agendamento {
    
     @FutureOrPresent
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date data;
+    private LocalDate data;
 
     
     //@JsonFormat(pattern = "hh:MM")

@@ -19,10 +19,15 @@ VALUES
 
 
 
-INSERT INTO `servico` (`nome`,`descricao`)
+INSERT INTO `servico` (`nome`,`descricao`, `usuario_id_usuario`)
 VALUES
-("pular codar","pulando muito"),
-("pedrinhas","carregarei pedra")
+("pular codar","pulando muito",1),
+("pedrinhas","carregarei pedra",2);
 
+
+INSERT INTO `agendamento` (`data`,`hora`, `servicos_id_servico`, `usuario_id_usuario`)
+VALUES
+("2023-04-03","18:30",1,5),
+("2023-05-04","21:20",2,6);
 
 
