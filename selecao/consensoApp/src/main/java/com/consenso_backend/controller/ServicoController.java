@@ -40,19 +40,17 @@ public class ServicoController {
 
     @GetMapping("/servico")
     public List<Servico> todosServicos(){
-        try{
             return servicoService.findAll();
-        }catch(Exception e){
-            return null;
-        }
+       
     }
 
     @GetMapping("/servico/{id}")
-    public Servico servicoPorId(@PathVariable("id") Integer id){
+    public Object servicoPorId(@PathVariable("id") Integer id){
        try{
         return servicoService.findById(id).get();
     }catch(Exception e){
-        return null;
+        String erro = "Usuario não encontrado/erro no caminho";
+        return erro;
     }
     }
 
@@ -67,7 +65,7 @@ public class ServicoController {
     }
 
     @PutMapping("/servico")
-    public Servico atualizarServico(@RequestBody Servico servico){
+    public Object atualizarServico(@RequestBody Servico servico){
        
        try{ 
             Servico servicoBD = servicoService.findById(servico.getIdServico()).get();
@@ -79,7 +77,9 @@ public class ServicoController {
 
             return servicoBD;
         }catch(Exception e){
-            return null;
+            String erro = "falha ao deletar usuario";
+
+            return erro;
         }
     
     }

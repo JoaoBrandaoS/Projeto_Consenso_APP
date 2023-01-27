@@ -20,30 +20,30 @@ public class TipoUsuarioController {
 
 
     @PostMapping("/tipousuario")
-    public TipoUsuario adicionarTipoUsuario(@RequestBody TipoUsuario tipo){
+    public Object adicionarTipoUsuario(@RequestBody TipoUsuario tipo){
         try{
         return tipoUsuarioService.save(tipo);
 
         }catch(Exception e){
-        return null;
+            String erro = "Falha ao tentar adicionar novo tipo de usuario";
+            return erro;
 
     }
     }
 
     @GetMapping("/tipousuario")
     public List<TipoUsuario> todosOsTiposUsuarios(){
-      try{
         return tipoUsuarioService.findAll();
-      }catch(Exception e){
-        return null;
-      }
+     
     }
 
     @GetMapping("/tipousuario/{id}")
-    public TipoUsuario unicoTipoUsuario(@PathVariable("id") Integer id){
+    public Object unicoTipoUsuario(@PathVariable("id") Integer id){
         try{return tipoUsuarioService.findById(id).get();
         }catch(Exception a){
-            return null;
+            String erro = "Falha ao tentar retornar tipo de usuario/ erro no caminho";
+            return erro;
+            
         }
     
     }
@@ -59,7 +59,7 @@ public class TipoUsuarioController {
     }
 
     @PutMapping("/tipousuario")
-    public TipoUsuario atualizarTipoUsuario(@RequestBody TipoUsuario tipoUsuario){
+    public Object atualizarTipoUsuario(@RequestBody TipoUsuario tipoUsuario){
         try{
         
             TipoUsuario tipoUsuarioBD = tipoUsuarioService.findById(tipoUsuario.getIdTipoUsuario()).get();
@@ -70,7 +70,8 @@ public class TipoUsuarioController {
 
             return tipoUsuarioBD;
         }catch(Exception e){
-            return null;
+            String erro = "Falha ao tentar adicionar novo tipo de usuario";
+            return erro;
         }
     }
 
