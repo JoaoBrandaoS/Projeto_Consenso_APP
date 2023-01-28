@@ -21,13 +21,19 @@ public class AgendamentoController {
     
 
     @PostMapping("/agendamento")
-    public Object novoAgendamento(@RequestBody Agendamento agendar){
-       try{
-            return  agendamentoService.save(agendar);
-        }catch(Exception e){
-            String erro = "Erro em adicionar novo agendamento";
-            return erro;
-        } 
+    public ResponseEntity<Object> novoAgendamento(@RequestBody Agendamento agendar){
+        try {
+            Usuario user = usuarioService.findByIdUsuario(agendamento.getUsuario().getIdUsuario()).get();
+            if (agendamento.getData() != null && agendamento.getHora() != null
+                && agendamento.getUsuario().getIdUsuario() != null) {
+
+                agendamentoService.save(agendamento);
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(verificacao);
+            }
+        } catch (RuntimeException erroLogin) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroLogin.getMessage());
+        }
+        return null;
     }
 
     @GetMapping("/agendamento")

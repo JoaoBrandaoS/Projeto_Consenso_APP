@@ -26,8 +26,9 @@ public class ServicoController {
     public ResponseEntity<Object> criarNovoServico(@RequestBody Servico servico){
        
         try{
-            Usuario user = usuarioService.findById(servico.getUsuario().getIdUsuario()).get();
-            if(user.getTipoUsuario().getIdTipoUsuario() == 2){
+            Usuario user = usuarioService.findByIdUsuario(agendamento.getUsuario().getIdUsuario()).get();
+            if(user.getTipoUsuario().getIdTipoUsuario() == 2 && servico.getNome() != null && servico.getDescricao() != null
+            && servico.getUsuario().getIdUsuario() != null ){
             servicoService.save(servico); 
             return ResponseEntity.status(HttpStatus.CREATED).body(servico);
            }
