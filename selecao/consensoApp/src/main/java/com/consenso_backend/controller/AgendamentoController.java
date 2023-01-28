@@ -53,33 +53,26 @@ public class AgendamentoController {
         
 
     @DeleteMapping("/agendamento/{id}")
-    public String deletarAgendamento(@PathVariable("id") Integer id){
+    public ResponseEntity<Object> deletarAgendamento(@PathVariable("id") Integer id){
         try{
             agendamentoService.deleteById(id);
-            return "Agendamento deletado!!";
+            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
         }catch(Exception e){
-            return "Falha ao deletar agendamento";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
 
     }
 
-    @PutMapping("/agendamento")
-    public Object atualizarAgendamento(@RequestBody Agendamento agendar){
+    @PutMapping("/agendamento/{id}")
+    public ResponseEntity<Agendamento> atualizarAgendamento(@PathVariable Integer id, @RequestBody Agendamento agendar){
+       
+        return agendamentoService.findByIdAgendamento(id).map(record -> {
+			record.setData(agendar.getData());
+			record.setHora(agendar.getHora());
+			Agendamento updated = agendamentoService.save(record);
+			return ResponseEntity.ok().body(updated);
+		}).orElse(ResponseEntity.notFound().build());
         
-        try{    
-            Agendamento agendarBD = agendamentoService.findById(agendar.getIdAgendamento()).get();
-            
-            agendarBD.setData(agendar.getData());
-            agendarBD.setHora(agendar.getHora());
-
-            agendarBD = agendamentoService.save(agendarBD);
-
-            return agendarBD;
-        }catch(Exception e){
-            String erro = "não foi possivel atualizar agendamento";
-            return erro;
-            
-        }
 
 
     }

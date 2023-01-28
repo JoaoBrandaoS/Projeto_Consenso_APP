@@ -67,24 +67,15 @@ public class ServicoController {
        }
     }
 
-    @PutMapping("/servico")
-    public Object atualizarServico(@RequestBody Servico servico){
+    @PutMapping("/servico/{id}")
+    public ResponseEntity<Servico> atualizarServico(@PathVariable Integer id, @RequestBody Servico servico){
        
-       try{ 
-            Servico servicoBD = servicoService.findById(servico.getIdServico()).get();
-
-            servicoBD.setNome(servico.getNome());
-            servicoBD.setDescricao(servico.getDescricao());
-
-            servicoBD = servicoService.save(servicoBD);
-
-            return servicoBD;
-        }catch(Exception e){
-            String erro = "falha ao deletar usuario";
-
-            return erro;
-        }
-    
+        return servicoService.findByIdServico(id).map(record -> {
+			record.setNome(servico.getNome());
+			record.setDescricao(servico.getDescricao());
+			Servico updated = servicoService.save(record);
+			return ResponseEntity.ok().body(updated);
+		}).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/servico/usuario/{id}")
