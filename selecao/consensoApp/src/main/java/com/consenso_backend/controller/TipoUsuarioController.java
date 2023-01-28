@@ -3,7 +3,8 @@ package com.consenso_backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.consenso_backend.model.TipoUsuario;
 import com.consenso_backend.service.TipoUsuarioService;
 
+
 @RestController
 public class TipoUsuarioController {
 
-
     @PostMapping("/tipousuario")
-    public Object adicionarTipoUsuario(@RequestBody TipoUsuario tipo){
+    public ResponseEntity<Object> adicionarTipoUsuario(@RequestBody TipoUsuario tipo){
         try{
-        return tipoUsuarioService.save(tipo);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(tipo);
 
         }catch(Exception e){
-            String erro = "Falha ao tentar adicionar novo tipo de usuario";
-            return erro;
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 
     }
     }
@@ -38,41 +39,30 @@ public class TipoUsuarioController {
     }
 
     @GetMapping("/tipousuario/{id}")
-    public Object unicoTipoUsuario(@PathVariable("id") Integer id){
-        try{return tipoUsuarioService.findById(id).get();
-        }catch(Exception a){
-            String erro = "Falha ao tentar retornar tipo de usuario/ erro no caminho";
-            return erro;
-            
-        }
-    
+    public ResponseEntity<TipoUsuario> unicoTipoUsuario(@PathVariable("id") Integer id){
+
+    return tipoUsuarioService.findById(id).map(record -> ResponseEntity.ok().body(record))
+    .orElse(ResponseEntity.notFound().build());
+        
     }
 
     @DeleteMapping("/tipousuario/{id}")
-    public String deletarUnicoUsuario(@PathVariable("id") Integer id){
+    public ResponseEntity<Object> deletarUnicoUsuario(@PathVariable("id") Integer id){
        try{
-        tipoUsuarioService.deleteById(id);
-        return "Tipo usuario deletado";
+        tipoUsuarioService.deleteById(id);   
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
        }catch(Exception e){
-        return "Tipo de usuario não foi deletado";
+        return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
        }
     }
 
     @PutMapping("/tipousuario")
-    public Object atualizarTipoUsuario(@RequestBody TipoUsuario tipoUsuario){
-        try{
-        
-            TipoUsuario tipoUsuarioBD = tipoUsuarioService.findById(tipoUsuario.getIdTipoUsuario()).get();
-
-            tipoUsuarioBD.setNome(tipoUsuario.getNome());
-
-            tipoUsuarioBD = tipoUsuarioService.save(tipoUsuarioBD);
-
-            return tipoUsuarioBD;
-        }catch(Exception e){
-            String erro = "Falha ao tentar adicionar novo tipo de usuario";
-            return erro;
-        }
+    public ResponseEntity<TipoUsuario> atualizarTipoUsuario(@PathVariable Integer id ,@RequestBody TipoUsuario tipoUsuario){
+          return tipoUsuarioService.findByIdTipoUsuario(id).map(record -> {
+             record.setNome(tipoUsuario.getNome());
+              TipoUsuario updated = tipoUsuarioService.save(record);
+              return ResponseEntity.ok().body(updated);
+          }).orElse(ResponseEntity.notFound().build());
     }
 
     @Autowired

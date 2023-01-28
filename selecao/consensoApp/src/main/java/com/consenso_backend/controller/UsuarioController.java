@@ -55,31 +55,27 @@ public ResponseEntity<Usuario> usuarioRegistradoPorId(@PathVariable("id") Intege
 }
 
 @DeleteMapping("/usuario/{id}")
-public String deletarUsuario(@PathVariable("id") Integer id){
+public ResponseEntity<Object> deletarUsuario(@PathVariable("id") Integer id){
     try{
     usuarioService.deleteById(id);
-    return "Usuario deletado com sucesso!!";
+    return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }catch(Exception e){
-        return "Não foi possivel deletar o usuario";
+     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
     }
 }
 
+
 @PutMapping("/usuario")
-public Object atualizarUsuario(@RequestBody Usuario usuario){
-    try{    
-        Usuario usuarioBD = usuarioService.findById(usuario.getIdUsuario()).get();
-        usuarioBD.setNome(usuario.getNome()); 
-        usuarioBD.setSobrenome(usuario.getSobrenome());
-        usuarioBD.setEmail(usuario.getEmail());
-        usuarioBD.setSenha(usuario.getSenha());
-
-        usuarioBD = usuarioService.save(usuarioBD);
-
-        return usuarioBD; 
-    }catch(Exception e){
-        String erro = "Erro a atualizar usuario ";
-        return erro;
-    }
+public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Integer id ,@RequestBody Usuario usuario){
+     return usuarioService.findByIdUsuario(id).map(record -> {
+            record.setNome(usuario.getNome());
+            record.setSobrenome(usuario.getSobrenome());
+            record.setSenha(usuario.getSenha());
+            record.setEmail(usuario.getEmail());
+            Usuario updated = usuarioService.save(record);
+            return ResponseEntity.ok().body(updated);
+          }).orElse(ResponseEntity.notFound().build());
 }
 
 

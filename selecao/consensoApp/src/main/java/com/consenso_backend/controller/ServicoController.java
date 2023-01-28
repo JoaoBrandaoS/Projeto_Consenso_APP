@@ -48,12 +48,8 @@ public class ServicoController {
 
     @GetMapping("/servico/{id}")
     public Object servicoPorId(@PathVariable("id") Integer id){
-       try{
-        return servicoService.findById(id).get();
-    }catch(Exception e){
-        String erro = "Usuario não encontrado/erro no caminho";
-        return erro;
-    }
+       return servicoService.findById(id).map(record -> ResponseEntity.ok().body(record))
+        .orElse(ResponseEntity.notFound().build());
     }
 
     @CrossOrigin
