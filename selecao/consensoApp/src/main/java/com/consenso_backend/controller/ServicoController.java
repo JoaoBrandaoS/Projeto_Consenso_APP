@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,13 +56,14 @@ public class ServicoController {
     }
     }
 
+    @CrossOrigin
     @DeleteMapping("/servico/{id}")
-    public String deletarServico(@PathVariable("id") Integer id){
+    public ResponseEntity<Object> deletarServico(@PathVariable("id") Integer id){
        try{
         servicoService.deleteById(id);   
-        return "Serviço deletado com sucesso";
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
        }catch(Exception e){
-        return "falha ao deletar contato";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
        }
     }
 

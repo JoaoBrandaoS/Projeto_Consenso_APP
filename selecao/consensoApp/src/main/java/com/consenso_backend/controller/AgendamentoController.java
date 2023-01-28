@@ -22,7 +22,7 @@ import com.consenso_backend.service.UsuarioService;
 @RestController
 public class AgendamentoController {
     
-
+    
     @PostMapping("/agendamento")
     public ResponseEntity<Object> novoAgendamento(@RequestBody Agendamento agendar){
         try {
