@@ -3,6 +3,7 @@ package com.consenso_backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.consenso_backend.model.Agendamento;
+import com.consenso_backend.model.Usuario;
 import com.consenso_backend.service.AgendamentoService;
+import com.consenso_backend.service.UsuarioService;
 
 
 @RestController
@@ -23,12 +26,12 @@ public class AgendamentoController {
     @PostMapping("/agendamento")
     public ResponseEntity<Object> novoAgendamento(@RequestBody Agendamento agendar){
         try {
-            Usuario user = usuarioService.findByIdUsuario(agendamento.getUsuario().getIdUsuario()).get();
-            if (agendamento.getData() != null && agendamento.getHora() != null
-                && agendamento.getUsuario().getIdUsuario() != null) {
+            Usuario user = usuarioService.findByIdUsuario(agendar.getUsuario().getIdUsuario()).get();
+            if (agendar.getData() != null && agendar.getHora() != null
+                && agendar.getUsuario().getIdUsuario() != null) {
 
-                agendamentoService.save(agendamento);
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body(verificacao);
+                agendamentoService.save(agendar);
+                return ResponseEntity.status(HttpStatus.ACCEPTED).body(user);
             }
         } catch (RuntimeException erroLogin) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroLogin.getMessage());
@@ -89,6 +92,9 @@ public class AgendamentoController {
 
     @Autowired
     private AgendamentoService agendamentoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
 
 }
