@@ -17,7 +17,7 @@ function funcaoPaginaCarregada() {
             })
             .then(data => {
                 alert("Serviço deletado com sucesso!");
-
+                location.reload();
             })
             .catch(error => {
                 console.log(error);
