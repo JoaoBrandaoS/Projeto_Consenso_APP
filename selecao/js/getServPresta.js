@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                 </div>
             </div>
-        </div>`
+        </div>`;
         const criar = document.getElementById("servicosLista");
         criar.appendChild(div);
         });

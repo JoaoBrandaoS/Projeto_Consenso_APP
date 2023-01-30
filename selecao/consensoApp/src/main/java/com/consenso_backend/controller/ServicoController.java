@@ -63,6 +63,7 @@ public class ServicoController {
        }
     }
 
+    @CrossOrigin
     @PutMapping("/servico/{id}")
     public ResponseEntity<Servico> atualizarServico(@PathVariable Integer id, @RequestBody Servico servico){
        

@@ -63,7 +63,8 @@ public class AgendamentoController {
         }
 
     }
-
+    
+    @CrossOrigin
     @PutMapping("/agendamento/{id}")
     public ResponseEntity<Agendamento> atualizarAgendamento(@PathVariable Integer id, @RequestBody Agendamento agendar){
        
