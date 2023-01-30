@@ -115,7 +115,7 @@ form.addEventListener("submit", function(event) {
         console.log(data);
         alert("Serviço alterado com sucesso");
         localStorage.getItem("idServico", null);
-        window.location.href = "meusagendamentos.html"
+        window.location.href = "prestadoragendamentos.html"
     })
     .catch(error => {
         console.log(error);
