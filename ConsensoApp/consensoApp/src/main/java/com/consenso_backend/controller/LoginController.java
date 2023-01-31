@@ -23,8 +23,8 @@ public class LoginController {
             if(verificarEmail.getSenha().equals(login.getSenha())){
                 return ResponseEntity.status(HttpStatus.ACCEPTED).body(verificarEmail);
             }else{
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Login errado!");
-                }
+                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
+            }
          
         }catch(RuntimeException erroLogin) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erroLogin.getMessage());
