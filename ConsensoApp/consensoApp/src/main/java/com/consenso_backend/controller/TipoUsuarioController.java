@@ -56,7 +56,7 @@ public class TipoUsuarioController {
        }
     }
 
-    @PutMapping("/tipousuario")
+    @PutMapping("/tipousuario/{id}")
     public ResponseEntity<TipoUsuario> atualizarTipoUsuario(@PathVariable Integer id ,@RequestBody TipoUsuario tipoUsuario){
           return tipoUsuarioService.findByIdTipoUsuario(id).map(record -> {
              record.setNome(tipoUsuario.getNome());

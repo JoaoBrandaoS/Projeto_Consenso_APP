@@ -21,7 +21,7 @@ public class Usuario {
     private String sobrenome;
     private String senha;
     
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String email;
     
 

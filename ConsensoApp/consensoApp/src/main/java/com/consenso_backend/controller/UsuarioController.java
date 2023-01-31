@@ -66,7 +66,7 @@ public ResponseEntity<Object> deletarUsuario(@PathVariable("id") Integer id){
 }
 
 
-@PutMapping("/usuario")
+@PutMapping("/usuario/{id}")
 public ResponseEntity<Usuario> atualizarUsuario(@PathVariable Integer id ,@RequestBody Usuario usuario){
      return usuarioService.findByIdUsuario(id).map(record -> {
             record.setNome(usuario.getNome());
