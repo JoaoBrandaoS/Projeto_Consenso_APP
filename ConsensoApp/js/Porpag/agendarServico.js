@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 let b = document.querySelector('#selServico')
                 console.log(b)
                 b.appendChild(option);
-                criarAgendamento();
             });
         })
         .catch(error => {
@@ -18,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
 });
 
-function criarAgendamento(){
+
     const form = document.getElementById("formCadastAgeda");
     form.addEventListener("submit", e => {
     e.preventDefault();
@@ -50,7 +49,7 @@ function criarAgendamento(){
     })
     .then(response => response.json())
     .then(data => {
-        alert("Cadastro realizado")
+        alert("Agendamento realizado!")
         window.location.href = "meusagendamentos.html"
         console.log(data);
     })
@@ -58,4 +57,3 @@ function criarAgendamento(){
         console.log(error);
     });
     });
-}
