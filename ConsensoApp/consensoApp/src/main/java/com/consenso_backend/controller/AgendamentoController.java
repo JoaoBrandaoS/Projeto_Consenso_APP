@@ -71,6 +71,7 @@ public class AgendamentoController {
         return agendamentoService.findByIdAgendamento(id).map(record -> {
 			record.setData(agendar.getData());
 			record.setHora(agendar.getHora());
+            record.setServicos(agendar.getServicos());
 			Agendamento updated = agendamentoService.save(record);
 			return ResponseEntity.ok().body(updated);
 		}).orElse(ResponseEntity.notFound().build());

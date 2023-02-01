@@ -91,11 +91,12 @@ const form = document.getElementById("alterarAgendamentoCliente");
 
 form.addEventListener("submit", function(event) {
     event.preventDefault();
-    let idServico = localStorage.getItem("idServico");
+    let idServico =  localStorage.getItem("idServico");
     const hora = document.getElementById("horaInput").value;
     const data = document.getElementById("dataInput").value;
-    const dataFormatada = new Date(data).toLocaleDateString('pt-BR');
-
+    const op = document.getElementById("selServico").value;
+    const dataFormatada = new Date(data).toLocaleDateString('pt-BR', {timeZone: 'UTC'});
+    console.log(op)
     const p = document.createElement("div");
     p.classList.add("invalid-feedback")
     p.classList.add("mt-1")
@@ -112,7 +113,6 @@ form.addEventListener("submit", function(event) {
 
     let dataV = document.getElementById("dataInput");
     let horaV = document.getElementById("dataInput");
-    
     if(dataFormatada === "Invalid Date"){
         dataV.classList.add("is-invalid");
         dataV.classList.add("border-danger");
@@ -131,14 +131,16 @@ form.addEventListener("submit", function(event) {
             },
             body: JSON.stringify({
                 hora: hora,
-                data: dataFormatada
+                data: dataFormatada,
+                servicos:{
+                    idServico: op
+                }
             })
         })
         .then(response => response.json())
         .then(data => {
             console.log(data);
             alert("Serviço alterado com sucesso");
-            localStorage.getItem("idServico", null);
             window.location.href = "meusagendamentos.html"
         })
         .catch(error => {

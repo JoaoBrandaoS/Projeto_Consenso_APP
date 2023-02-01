@@ -1,3 +1,5 @@
+var x;
+var y;
 const idServico = localStorage.getItem("idServico");
 document.addEventListener("DOMContentLoaded", function() {
     fetch(`http://localhost:8080/servico/${idServico}`, {
@@ -7,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(data => {
         let nome = data.nome;
         let descricao = data.descricao;
-        const nullNome = nome;
-        const nullDescricao = descricao;
+        x = nome;
+        y = descricao;
         let divTeste = document.getElementById("editarServicosPresta");
         divTeste.innerHTML = `
             <div class="d-flex fs-5">
@@ -27,12 +29,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 <button class="btn btn-primary fs-5 border-3 borderCor botaoTexto" type="submit">SALVAR</button>
             </div>
         `;
+        
     })
     .catch(error => {
         console.log(error)
     });
 });
-
 
 const form = document.getElementById("editarServicosPresta");
 
@@ -40,8 +42,7 @@ form.addEventListener("submit", function(event) {
     event.preventDefault();
     let nome = document.getElementById("nomeEditarServ").value;
     let descricao = document.getElementById("descricaoEditarServ").value;
-
-    if(nomeD === "" || nomeD == null){
+    if((nome === "" || nome == null) && (descricao === "" || descricao == null)){
         fetch(`http://localhost:8080/servico/` + idServico, {
             method: 'PUT',
             headers: {
@@ -49,7 +50,29 @@ form.addEventListener("submit", function(event) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                nome: nullNome,
+                nome: x,
+                descricao: y
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert("Serviço alterado com sucesso")
+            window.location.href = "Servicos.html"
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+    else if(nome === "" || nome == null){
+        fetch(`http://localhost:8080/servico/` + idServico, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: x,
                 descricao: descricao
             })
         })
@@ -63,7 +86,7 @@ form.addEventListener("submit", function(event) {
             console.log(error);
         });
     }
-    else if(descricaoD === "" || descricaoD == null){
+    else if(descricao === "" || descricao == null){
         fetch(`http://localhost:8080/servico/` + idServico, {
             method: 'PUT',
             headers: {
@@ -72,7 +95,7 @@ form.addEventListener("submit", function(event) {
             },
             body: JSON.stringify({
                 nome: nome,
-                descricao: nullDescricao
+                descricao: y
             })
         })
         .then(response => response.json())

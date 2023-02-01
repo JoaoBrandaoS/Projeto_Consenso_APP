@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                         </div>    
                                         <div class="col-12 text-start fs-5">
                                             <label for="" class="color-light col"><strong>Prestador:</strong></label>
-                                            <label for="">${agendamento.servicos.usuario.nome}</label>
+                                            <label for="">${agendamento.usuario.nome}</label>
                                         </div>
                                         <div class="col-12 text-start fs-5">
                                             <label for="" class="color-light col"><strong>Dia:</strong></label>
