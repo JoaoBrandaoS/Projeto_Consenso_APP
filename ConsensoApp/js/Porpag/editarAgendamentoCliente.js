@@ -29,11 +29,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="m-2 text-start text-secondary fs-4">
                     <label for="data">Data:</label>
                 </div>
-                <div class="form-label  border-secondary ">
+                <div class="form-label  border-secondary" id="dataDiv">
                   <input type="date" class="form-control border-secondary border-3 fs-3 rounded-3" placeholder="${dataD}" id="dataInput">
                 </div>
             </div>
-            <div class="col-xl-2 col-lg-2 col-md-3 col">
+            <div class="col-xl-2 col-lg-2 col-md-3 col" id="horaDiv">
                 <div class="m-2 text-start text-secondary fs-4">
                     <label for="data">Hora:</label>
                 </div>
@@ -95,30 +95,56 @@ form.addEventListener("submit", function(event) {
     const hora = document.getElementById("horaInput").value;
     const data = document.getElementById("dataInput").value;
     const dataFormatada = new Date(data).toLocaleDateString('pt-BR');
-    console.log(dataFormatada);
-    console.log(hora)
 
-    fetch(`http://localhost:8080/agendamento/` + idServico, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            hora: hora,
-            data: dataFormatada
+    const p = document.createElement("div");
+    p.classList.add("invalid-feedback")
+    p.classList.add("mt-1")
+    p.classList.add("fs-6")
+    p.setAttribute("id", "pEditavel")
+    p.innerHTML = `campo obrigatório`
+    let x = document.getElementById("pEditavel")
+    if(x != null){
+      x.remove();
+    }
+
+    let horaDiv = document.getElementById("horaDiv");
+    let dataDiv = document.getElementById("dataDiv");
+
+    let dataV = document.getElementById("dataInput");
+    let horaV = document.getElementById("dataInput");
+    
+    if(dataFormatada === "Invalid Date"){
+        dataV.classList.add("is-invalid");
+        dataV.classList.add("border-danger");
+        p.classList.add("text-start")
+        dataDiv.appendChild(p);
+    }else if(hora === "" || hora == null){
+        horaV.classList.add("is-invalid");
+        horaV.classList.add("border-danger")
+        horaDiv.appendChild(p);
+    }else{
+        fetch(`http://localhost:8080/agendamento/` + idServico, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                hora: hora,
+                data: dataFormatada
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        alert("Serviço alterado com sucesso");
-        localStorage.getItem("idServico", null);
-        window.location.href = "meusagendamentos.html"
-    })
-    .catch(error => {
-        console.log(error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert("Serviço alterado com sucesso");
+            localStorage.getItem("idServico", null);
+            window.location.href = "meusagendamentos.html"
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
 });
 
 function carregarlista() {

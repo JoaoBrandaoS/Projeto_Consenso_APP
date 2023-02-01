@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(data => {
         let nome = data.nome;
         let descricao = data.descricao;
+        const nullNome = nome;
+        const nullDescricao = descricao;
         let divTeste = document.getElementById("editarServicosPresta");
         divTeste.innerHTML = `
             <div class="d-flex fs-5">
@@ -36,27 +38,73 @@ const form = document.getElementById("editarServicosPresta");
 
 form.addEventListener("submit", function(event) {
     event.preventDefault();
-    const nome = document.getElementById("nomeEditarServ").value;
-    const descricao = document.getElementById("descricaoEditarServ").value;
+    let nome = document.getElementById("nomeEditarServ").value;
+    let descricao = document.getElementById("descricaoEditarServ").value;
 
-    fetch(`http://localhost:8080/servico/` + idServico, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            nome: nome,
-            descricao: descricao
+    if(nomeD === "" || nomeD == null){
+        fetch(`http://localhost:8080/servico/` + idServico, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: nullNome,
+                descricao: descricao
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        alert("Serviço alterado com sucesso")
-        window.location.href = "Servicos.html"
-    })
-    .catch(error => {
-        console.log(error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert("Serviço alterado com sucesso")
+            window.location.href = "Servicos.html"
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+    else if(descricaoD === "" || descricaoD == null){
+        fetch(`http://localhost:8080/servico/` + idServico, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: nome,
+                descricao: nullDescricao
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert("Serviço alterado com sucesso")
+            window.location.href = "Servicos.html"
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+    else{
+        fetch(`http://localhost:8080/servico/` + idServico, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nome: nome,
+                descricao: descricao
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert("Serviço alterado com sucesso")
+            window.location.href = "Servicos.html"
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
 });

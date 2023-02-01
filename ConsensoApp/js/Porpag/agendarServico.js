@@ -31,29 +31,57 @@ document.addEventListener("DOMContentLoaded", function() {
     const idServico = document.getElementById("selServico").value;
     console.log(idServico);
 
-    fetch("http://localhost:8080/agendamento", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            data: dataFormatada,
-            hora: horaConvertida,
-            usuario:{
-                idUsuario: idUsuario
+    const p = document.createElement("div");
+    p.classList.add("invalid-feedback")
+    p.classList.add("mt-1")
+    p.classList.add("fs-6")
+    p.setAttribute("id", "pEditavel")
+    p.innerHTML = `campo obrigatório`
+    let x = document.getElementById("pEditavel")
+    if(x != null){
+      x.remove();
+    }
+
+    let horaDiv = document.getElementById("agendarHora");
+    let dataDiv = document.getElementById("agendarData");
+
+    let dataV = document.getElementById("dataInput");
+    let horaV = document.getElementById("dataInput");
+    
+    if(dataFormatada === "Invalid Date"){
+        dataV.classList.add("is-invalid");
+        dataV.classList.add("border-danger");
+        dataDiv.classList.add("text-start")
+        dataDiv.appendChild(p);
+    }else if(horaConvertida === "" || horaConvertida == null){
+        horaV.classList.add("is-invalid");
+        horaV.classList.add("border-danger")
+        horaDiv.appendChild(p);
+    }else{
+        fetch("http://localhost:8080/agendamento", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-            servicos:{
-                idServico: idServico
-            }
+            body: JSON.stringify({
+                data: dataFormatada,
+                hora: horaConvertida,
+                usuario:{
+                    idUsuario: idUsuario
+                },
+                servicos:{
+                    idServico: idServico
+                }
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert("Agendamento realizado!")
-        window.location.href = "meusagendamentos.html"
-        console.log(data);
-    })
-    .catch(error => {
-        console.log(error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            alert("Agendamento realizado!")
+            window.location.href = "meusagendamentos.html"
+            console.log(data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
     });

@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 `;
                 lista.appendChild(div);
                 deletarAgendamentoCliente();
+                atualizarAgenndamentoCliente();
             });
         }
     })
@@ -100,6 +101,7 @@ function deletarAgendamentoCliente(){
       });
     });    
 }
+
 function atualizarAgenndamentoCliente(){
     const updateButtons = document.querySelectorAll('.update-button');
     updateButtons.forEach(button => {
