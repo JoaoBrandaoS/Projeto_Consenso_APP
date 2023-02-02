@@ -76,8 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => response.json())
         .then(data => {
-            alert("Agendamento realizado!")
-            window.location.href = "meusagendamentos.html"
+            $("#sucessoModal").modal("show");
             console.log(data);
         })
         .catch(error => {

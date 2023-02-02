@@ -92,8 +92,7 @@ function deletarAgendamentoCliente(){
           }
       })
       .then(data => {
-          alert("Serviço deletado com sucesso!");
-          location.reload();
+        $("#sucessoModal").modal("show");
       })
         .catch(error => {
           console.error('Erro ao deletar agendamento:', error);

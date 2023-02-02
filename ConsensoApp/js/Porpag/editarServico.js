@@ -123,8 +123,7 @@ form.addEventListener("submit", function(event) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            alert("Serviço alterado com sucesso")
-            window.location.href = "Servicos.html"
+            $("#sucessoModal").modal("show");
         })
         .catch(error => {
             console.log(error);

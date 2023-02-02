@@ -128,3 +128,10 @@ label{
 textarea{
     resize: none !important;
 }
+footer{
+    position: fixed;
+    bottom: 0;
+}
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}

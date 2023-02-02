@@ -100,15 +100,13 @@ async function validarEntradas(n, e, s, sn) {
         if (response.status == 201) {
             if(tipouser == 1){
               let data = await response.json();
+              $('#modalCadastroSucesso').modal('show');
               localStorage.setItem("idUsuario", data.idUsuario);
-              alert("Cadastro completo " + nome);
-              window.location.href = "../login.html";
             }
             else if(tipouser == 2){
               let data = await response.json();
+              $('#modalCadastroSucesso').modal('show');
               localStorage.setItem("idUsuario", data.idUsuario);
-              alert("Cadastro completo " + nome);
-              window.location.href = "../login.html";
             }
         }
         else if(response.status == 400){

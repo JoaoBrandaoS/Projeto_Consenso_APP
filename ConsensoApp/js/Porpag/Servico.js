@@ -75,8 +75,7 @@ function deletarServ() {
                 }
             })
             .then(data => {
-                alert("Serviço deletado com sucesso!");
-                location.reload();
+                $("#sucessoModal").modal("show");
             })
             .catch(error => {
                 console.log(error);

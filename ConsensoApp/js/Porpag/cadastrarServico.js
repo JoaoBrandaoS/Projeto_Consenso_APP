@@ -58,8 +58,7 @@ form.addEventListener("submit", async (event) => {
         throw new Error(response.statusText);
       }
       else if(response.ok){
-        alert("Cadastro realizado com sucesso!");
-        window.location.href = "Servicos.html"
+        $('#modalCadastroSucesso').modal('show');
       }
     } catch (error) {
       console.error(error);
