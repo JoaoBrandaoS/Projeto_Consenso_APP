@@ -78,8 +78,7 @@ function deletarServ() {
                 $("#sucessoModal").modal("show");
             })
             .catch(error => {
-                console.log(error);
-                alert(error.message);
+                $("#falhaModal").modal("show");
             });
         });
     });

@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                         </div>
                                         <div class="col-12 text-start fs-5">
                                             <label for="" class="color-light col"><strong>Hórario</strong></label>
-                                            <label for="">${agendamento.hora[0]}:${agendamento.hora[1]}</label>
+                                            <label for="">${agendamento.hora[0]}:${agendamento.hora[1]}h</label>
                                         </div>
                                     </div>
                                 </div>
