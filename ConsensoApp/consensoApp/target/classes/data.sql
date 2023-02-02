@@ -21,8 +21,10 @@ VALUES
 
 INSERT INTO `servico` (`nome`,`descricao`, `usuario_id_usuario`)
 VALUES
-("pular codar","pulando muito",1),
-("pedrinhas","carregarei pedra",2);
+("Pintar casa","Pintando casa",1),
+("Cortar grama","cortando grama",2),
+("Lavar Carro","lavando carro",5),
+("Poldar arvore","poldando arvore",7);
 
 
 INSERT INTO `agendamento` (`data`,`hora`, `servicos_id_servico`, `usuario_id_usuario`)
